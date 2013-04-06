@@ -1,12 +1,8 @@
 package chess;
-import java.util.ArrayList;
 
 import junit.framework.TestCase;
 
 import org.junit.Test;
-
-import pieces.Pawn;
-
 
 
 public class BoardTest extends TestCase {
@@ -14,28 +10,31 @@ public class BoardTest extends TestCase {
 
     @Test
     public void testNumberOfPieces() {
-        assertEquals(0, board.getNumberOfPieces());
+        assertEquals(16, board.getNumberOfPieces());
     }
 
     @Test
-    public void testAddPawn() {
-        Pawn white = new Pawn(Pawn.WHITE);
-        Pawn black = new Pawn(Pawn.BLACK);
+    public void testRanks() {
+        assertEquals("PPPPPPPP", board.getRank(2));
+        assertEquals("pppppppp", board.getRank(7));
+    }
 
-        board.addPawn(white);
-        assertEquals(1, board.getNumberOfPieces());
-
-        ArrayList<Pawn> pieces = board.getPieces();
-
-        assertEquals(white, pieces.get(0));
-
-        board.addPawn(black);
-        assertEquals(2, board.getNumberOfPieces());
-
-        pieces = board.getPieces();
-        assertEquals(white, pieces.get(0));
-        assertEquals(black, pieces.get(1));
-
+    @Test
+    public void testFullBoard() {
+	
+	
+        assertEquals(
+            "........" + Board.NEWLINE +
+            "pppppppp" + Board.NEWLINE +
+            "........" + Board.NEWLINE +
+            "........" + Board.NEWLINE +
+            "........" + Board.NEWLINE +
+            "........" + Board.NEWLINE +
+            "PPPPPPPP" + Board.NEWLINE +
+            "........" + Board.NEWLINE
+            ,
+            board.toString()
+        );
     }
 
 }

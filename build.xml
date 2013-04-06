@@ -1,0 +1,30 @@
+<?xml version="1.0" ?>
+<project>
+
+    <path id="classpath">
+        <pathelement location="${basedir}"/>
+        <pathelement location="/usr/share/java/junit4.jar" />
+    </path>
+
+    <target name="build">
+        <javac srcdir="${basedir}" destdir="${basedir}">
+
+            <classpath refid="classpath" />
+
+        </javac>
+
+    </target>
+
+    <target name="junit">
+        <java classname="junit.textui.TestRunner" >
+            <arg value="AllTests" />
+            <permissions>
+              <grant class="java.security.AllPermission"/>
+            </permissions>
+
+            <classpath refid="classpath" />
+
+        </java>
+    </target>
+
+</project>

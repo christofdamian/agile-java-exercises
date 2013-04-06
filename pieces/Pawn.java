@@ -6,12 +6,15 @@ public class Pawn {
 
     String colour;
 
+    String toString;
+
     /**
      * Create pawn of colour
      * @param colour
      */
-    public Pawn(String colour) {
+    public Pawn(String colour, String toString) {
         this.colour = colour;
+        this.toString = toString;
     }
 
     /**
@@ -20,6 +23,7 @@ public class Pawn {
     public Pawn()
     {
         this.colour = WHITE;
+        this.toString = "P";
     }
 
     /**
@@ -30,5 +34,8 @@ public class Pawn {
         return colour;
     }
 
+    public String toString() {
+        return toString;
+    }
 
 }
