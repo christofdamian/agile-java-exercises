@@ -1,26 +1,26 @@
 <?xml version="1.0" ?>
 <project>
-    <property name="destdir" value="${basedir}/dest" />
+    <property name="outputdir" value="${basedir}/output" />
 
 
     <path id="classpath">
         <pathelement location="${basedir}"/>
-        <pathelement location="${destdir}"/>
+        <pathelement location="${outputdir}"/>
         <pathelement location="/usr/share/java/junit4.jar" />
     </path>
 
     <target name="prepare">
-        <mkdir dir="${destdir}"/>
+        <mkdir dir="${outputdir}"/>
     </target>
 
     <target name="clean">
-        <delete dir="${destdir}" />
+        <delete dir="${outputdir}" />
     </target>
 
     <target name="compile" depends="prepare">
         <javac
             srcdir="${basedir}"
-            destdir="${destdir}"
+            destdir="${outputdir}"
             includeantruntime="false"
             >
 
