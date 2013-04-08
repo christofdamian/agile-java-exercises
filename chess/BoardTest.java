@@ -2,36 +2,42 @@ package chess;
 
 import junit.framework.TestCase;
 
-import org.junit.Test;
+import static util.StringUtil.NEWLINE;
 
 
 public class BoardTest extends TestCase {
-    Board board = new Board();
+    Board board;
 
-    @Test
-    public void testNumberOfPieces() {
-        assertEquals(16, board.getNumberOfPieces());
+    public void setUp() {
+        board = new Board();
     }
 
-    @Test
+    public void testNumberOfPieces() {
+        assertEquals(32, board.getNumberOfPieces());
+        assertEquals(16, board.getNumberOfWhitePieces());
+        assertEquals(16, board.getNumberOfBlackPieces());
+    }
+
     public void testRanks() {
         assertEquals("PPPPPPPP", board.getRank(2));
         assertEquals("pppppppp", board.getRank(7));
+        assertEquals("rnbqkbnr", board.getRank(8));
     }
 
-    @Test
+
+
     public void testFullBoard() {
-	
-	
+
+
         assertEquals(
-            "........" + Board.NEWLINE +
-            "pppppppp" + Board.NEWLINE +
-            "........" + Board.NEWLINE +
-            "........" + Board.NEWLINE +
-            "........" + Board.NEWLINE +
-            "........" + Board.NEWLINE +
-            "PPPPPPPP" + Board.NEWLINE +
-            "........" + Board.NEWLINE
+            "rnbqkbnr" + NEWLINE +
+            "pppppppp" + NEWLINE +
+            "........" + NEWLINE +
+            "........" + NEWLINE +
+            "........" + NEWLINE +
+            "........" + NEWLINE +
+            "PPPPPPPP" + NEWLINE +
+            "RNBQKBNR" + NEWLINE
             ,
             board.toString()
         );

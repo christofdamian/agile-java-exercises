@@ -2,53 +2,72 @@ package chess;
 
 import java.util.ArrayList;
 
-import pieces.Pawn;
+import pieces.Piece;
 
+import static util.StringUtil.NEWLINE;
 
 public class Board {
-    final static int SIZE = 8;
-
-    final static String NEWLINE = System.getProperty("line.seperaor");
-
-    ArrayList<ArrayList<Pawn>> pieces = new ArrayList<ArrayList<Pawn>>();
+    ArrayList<ArrayList<Piece>> pieces = new ArrayList<ArrayList<Piece>>();
 
     public Board() {
         initialize();
     }
 
     private void initialize() {
-        for (int i=0; i<Board.SIZE; i++) {
-            pieces.add(new ArrayList<Pawn>());
+        Piece.resetCount();
+
+        for (int i=0; i<8; i++) {
+            pieces.add(new ArrayList<Piece>());
         }
-        pieces.set(1, createRank(Pawn.WHITE, "P"));
-        pieces.set(6, createRank(Pawn.BLACK, "p"));
+        pieces.set(0, createQueenRank(Piece.COLOUR_WHITE));
+        pieces.set(1, createPawnRank(Piece.COLOUR_WHITE));
+        pieces.set(6, createPawnRank(Piece.COLOUR_BLACK));
+        pieces.set(7, createQueenRank(Piece.COLOUR_BLACK));
     }
 
-    private ArrayList<Pawn> createRank(String colour, String toString) {
-        ArrayList<Pawn> rank = new ArrayList<Pawn>();
-        for (int i=0; i<Board.SIZE; i++) {
-            rank.add(new Pawn(colour, toString));
+    private ArrayList<Piece> createPawnRank(String colour) {
+        ArrayList<Piece> rank = new ArrayList<Piece>();
+        for (int i=0; i<8; i++) {
+            rank.add(Piece.create(colour, Piece.TYPE_PAWN));
         }
         return rank;
     }
+
+    private ArrayList<Piece> createQueenRank(String colour) {
+        ArrayList<Piece> rank = new ArrayList<Piece>();
+        rank.add(Piece.create(colour, Piece.TYPE_ROOK));
+        rank.add(Piece.create(colour, Piece.TYPE_KNIGHT));
+        rank.add(Piece.create(colour, Piece.TYPE_BISHOP));
+        rank.add(Piece.create(colour, Piece.TYPE_QUEEN));
+        rank.add(Piece.create(colour, Piece.TYPE_KING));
+        rank.add(Piece.create(colour, Piece.TYPE_BISHOP));
+        rank.add(Piece.create(colour, Piece.TYPE_KNIGHT));
+        rank.add(Piece.create(colour, Piece.TYPE_ROOK));
+        return rank;
+    }
+
 
     /**
      * Get number of pieces
      * @return
      */
     public int getNumberOfPieces() {
-        int number = 0;
-        for (int i=0; i<Board.SIZE; i++) {
-            number += pieces.get(i).size();
-        }
-        return number;
+       return Piece.getPiecesInUse();
+    }
+
+    public int getNumberOfWhitePieces() {
+        return Piece.getNumberOfWhitePieces();
+    }
+
+    public int getNumberOfBlackPieces() {
+        return Piece.getNumberOfBlackPieces();
     }
 
     /**
      * Return list of pieces
      * @return
      */
-    public ArrayList<ArrayList<Pawn>> getPieces() {
+    public ArrayList<ArrayList<Piece>> getPieces() {
         return pieces;
     }
 
@@ -58,7 +77,7 @@ public class Board {
         }
 
         StringBuilder builder = new StringBuilder();
-        for (int i=0; i<Board.SIZE; i++) {
+        for (int i=0; i<8; i++) {
             builder.append(pieces.get(rank-1).get(i));
         }
         return builder.toString();
@@ -66,9 +85,9 @@ public class Board {
 
     public String toString() {
         StringBuilder builder = new StringBuilder();
-        for (int i=Board.SIZE; i>0; i--) {
+        for (int i=8; i>0; i--) {
             builder.append(getRank(i));
-            builder.append(Board.NEWLINE);
+            builder.append(NEWLINE);
         }
         return builder.toString();
     }

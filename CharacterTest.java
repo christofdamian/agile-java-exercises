@@ -1,11 +1,8 @@
-import static org.junit.Assert.*;
-
-import org.junit.Test;
+import junit.framework.TestCase;
 
 
-public class CharacterTest {
+public class CharacterTest extends TestCase {
 
-    @Test
     public void testWhitespace() {
         assertTrue(Character.isWhitespace(' '));
         assertTrue(Character.isWhitespace('\n'));
@@ -13,7 +10,6 @@ public class CharacterTest {
         assertTrue(Character.isWhitespace('\r'));
     }
 
-    @Test
     public void testIdentifier() {
         assertTrue(Character.isJavaIdentifierPart('$'));
 
