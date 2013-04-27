@@ -1,5 +1,6 @@
 package chess;
 
+import pieces.Piece;
 import junit.framework.TestCase;
 
 import static util.StringUtil.NEWLINE;
@@ -24,8 +25,6 @@ public class BoardTest extends TestCase {
         assertEquals("rnbqkbnr", board.getRank(8));
     }
 
-
-
     public void testFullBoard() {
 
 
@@ -43,4 +42,15 @@ public class BoardTest extends TestCase {
         );
     }
 
+    public void testCountPiece()
+    {
+        assertEquals(1, board.countPiece("q"));
+        assertEquals(8, board.countPiece("P"));
+    }
+
+    public void testGetPosition(String position)
+    {
+        assertEquals("Q", board.getPosition("d8"));
+        assertEquals("r", board.getPosition("1h"));
+    }
 }

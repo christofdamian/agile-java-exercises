@@ -110,4 +110,24 @@ public class Board {
         }
         return builder.toString();
     }
+
+    public int countPiece(String name)
+    {
+        int count = 0;
+        for (ArrayList<Piece> row: pieces) {
+            for (Piece piece: row) {
+                if (piece.toString().equals(name)) {
+                    count++;
+                }
+            }
+        }
+        return count;
+    }
+
+    public Piece getPosition(String position)
+    {
+        int column = (int)position.charAt(0);
+
+        return pieces.get(0).get(0);
+    }
 }
