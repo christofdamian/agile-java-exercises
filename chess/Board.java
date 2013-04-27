@@ -143,4 +143,40 @@ public class Board {
 
         pieces.get(row).set(column, piece);
     }
+
+    private int countPieces(ArrayList<Piece> row, Piece search)
+    {
+        int count = 0;
+        for (Piece piece: row) {
+            if (piece.toString().equals(search.toString())) {
+                count++;
+            }
+        }
+        return count;
+    }
+
+    public float getStrength()
+    {
+        float strength = 0;
+        for (ArrayList<Piece> row: pieces) {
+            for (Piece piece: row) {
+                if (piece.toString().equalsIgnoreCase("b")) {
+                    strength += 3;
+                } else if (piece.toString().equalsIgnoreCase("q")) {
+                    strength += 9;
+                } else if (piece.toString().equalsIgnoreCase("r")) {
+                    strength += 5;
+                } else if (piece.toString().equalsIgnoreCase("n")) {
+                    strength += 2.5;
+                } else if (piece.toString().equalsIgnoreCase("p")) {
+                    if (countPieces(row, piece)>1) {
+                        strength += 1;
+                    } else {
+                        strength += 0.5;
+                    }
+                }
+            }
+        }
+        return strength;
+    }
 }
