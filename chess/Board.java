@@ -26,10 +26,10 @@ public class Board {
     }
 
     public void setup() {
-        createWhiteQueenRank(pieces.get(0));
-        createWhitePawnRank(pieces.get(1));
-        createBlackPawnRank(pieces.get(6));
-        createBlackQueenRank(pieces.get(7));
+        createBlackQueenRank(pieces.get(0));
+        createBlackPawnRank(pieces.get(1));
+        createWhitePawnRank(pieces.get(6));
+        createWhiteQueenRank(pieces.get(7));
     }
 
     private void createWhitePawnRank(ArrayList<Piece> row) {
@@ -90,20 +90,16 @@ public class Board {
     }
 
     public String getRank(int rank) {
-        if (pieces.get(rank-1).size()==0) {
-            return "........";
-        }
-
         StringBuilder builder = new StringBuilder();
         for (int i=0; i<8; i++) {
-            builder.append(pieces.get(rank-1).get(i));
+            builder.append(pieces.get(8-rank).get(i));
         }
         return builder.toString();
     }
 
     public String toString() {
         StringBuilder builder = new StringBuilder();
-        for (int i=8; i>0; i--) {
+        for (int i=1; i<=8; i++) {
             builder.append(getRank(i));
             builder.append(NEWLINE);
         }
@@ -123,10 +119,28 @@ public class Board {
         return count;
     }
 
+    private int getRowFromPosition(String position)
+    {
+        return (int)position.charAt(1)-(int)'1';
+    }
+
+    private int getColumnFromPosition(String position)
+    {
+        return ((int)position.charAt(0)-(int)'a');
+    }
+
     public Piece getPosition(String position)
     {
-        int column = ((int)position.charAt(0)-(int)'a');
-        int row = 8-((int)position.charAt(1)-(int)'0');
+        int column = getColumnFromPosition(position);
+        int row = getRowFromPosition(position);
         return pieces.get(row).get(column);
+    }
+
+    public void setPosition(String position, Piece piece)
+    {
+        int column = getColumnFromPosition(position);
+        int row = getRowFromPosition(position);
+
+        pieces.get(row).set(column, piece);
     }
 }
