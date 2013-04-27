@@ -160,20 +160,26 @@ public class Board {
     {
         for (ArrayList<Piece> row: pieces) {
             for (Piece piece: row) {
-                if (piece.toString().equalsIgnoreCase("b")) {
+                switch (piece.toString().toLowerCase()) {
+                case "b":
                     piece.setStrength(3);
-                } else if (piece.toString().equalsIgnoreCase("q")) {
+                    break;
+                case "q":
                     piece.setStrength(9);
-                } else if (piece.toString().equalsIgnoreCase("r")) {
+                    break;
+                case "r":
                     piece.setStrength(5);
-                } else if (piece.toString().equalsIgnoreCase("n")) {
+                    break;
+                case "n":
                     piece.setStrength(2.5);
-                } else if (piece.toString().equalsIgnoreCase("p")) {
-                    if (countPieces(row, piece)>1) {
+                    break;
+                case "p":
+                   if (countPieces(row, piece)>1) {
                         piece.setStrength(1);
                     } else {
                         piece.setStrength(0.5);
                     }
+                   break;
                 }
             }
         }
