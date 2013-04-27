@@ -2,8 +2,6 @@ package chess;
 
 import java.util.ArrayList;
 import java.util.Collections;
-import java.util.HashMap;
-import java.util.Map;
 
 import pieces.Piece;
 import pieces.Piece.Type;
@@ -12,8 +10,6 @@ import static util.StringUtil.NEWLINE;
 
 public class Board {
     ArrayList<ArrayList<Piece>> pieces = new ArrayList<ArrayList<Piece>>();
-
-    Map<Piece.Type, Double> strengthMap = null;
 
     public Board() {
         initialize();
@@ -161,33 +157,11 @@ public class Board {
         return count;
     }
 
-    private Map<Piece.Type, Double> getStrengthMap()
-    {
-        if (strengthMap==null) {
-            strengthMap = new HashMap<Piece.Type, Double>();
-            strengthMap.put(Type.BISHOP, 3.0);
-            strengthMap.put(Type.QUEEN, 9.0);
-            strengthMap.put(Type.ROOK, 5.0);
-            strengthMap.put(Type.KNIGHT, 2.5);
-            strengthMap.put(Type.PAWN, 0.5);
-        }
-
-        return strengthMap;
-    }
-
-    private double pieceStrength(Piece piece)
-    {
-        if (getStrengthMap().containsKey(piece.getType())) {
-            return getStrengthMap().get(piece.getType());
-        }
-        return 0;
-    }
-
     public void calculateStrength()
     {
         for (ArrayList<Piece> row: pieces) {
             for (Piece piece: row) {
-                piece.setStrength(pieceStrength(piece));
+                piece.setStrength(piece.getType().getStrength());
                 if (piece.getType()==Type.PAWN && countPieces(row, piece)>1) {
                     piece.setStrength(1);
                 }

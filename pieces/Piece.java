@@ -8,24 +8,31 @@ public class Piece implements Comparable<Piece> {
     }
 
     public enum Type {
-        PAWN("p"),
-        KNIGHT("n"),
-        ROOK("r"),
-        KING("k"),
-        QUEEN("q"),
-        BISHOP("b"),
-        EMPTY(".");
+        PAWN("p", 0.5),
+        KNIGHT("n", 2.5),
+        ROOK("r", 5.0),
+        KING("k", 0.0),
+        QUEEN("q", 9.0),
+        BISHOP("b", 3.0),
+        EMPTY(".", 0.0);
 
         String name;
+        double strength;
 
-        private Type(String name)
+        private Type(String name, double strength)
         {
             this.name = name;
+            this.strength = strength;
         }
 
         public String getName()
         {
             return name;
+        }
+
+        public double getStrength()
+        {
+            return strength;
         }
     }
 
