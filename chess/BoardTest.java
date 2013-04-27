@@ -135,4 +135,15 @@ public class BoardTest extends TestCase {
         assertEquals("[q]", board.getBlackPiecesStrength().toString());
     }
 
+    public void testCheckKingMove()
+    {
+        assertTrue(board.checkKingMove("d5", "e5"));
+        assertTrue(board.checkKingMove("d5", "d6"));
+        assertTrue(board.checkKingMove("d5", "e6"));
+        assertTrue(board.checkKingMove("d5", "c4"));
+
+        assertFalse(board.checkKingMove("d5", "d5"));
+        assertFalse(board.checkKingMove("d5", "c7"));
+        assertFalse(board.checkKingMove("d5", "a5"));
+    }
 }

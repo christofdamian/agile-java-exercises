@@ -208,4 +208,18 @@ public class Board {
     {
         return getPiecesStrength(false);
     }
+
+    public boolean checkKingMove(String from, String to)
+    {
+        int rows = Math.abs(getRowFromPosition(from)-getRowFromPosition(to));
+        int cols = Math.abs(getColumnFromPosition(from)-getColumnFromPosition(to));
+
+        if (rows==0 && cols==0) {
+            return false;
+        }
+        if (rows<=1 && cols<=1) {
+            return true;
+        }
+        return false;
+    }
 }
