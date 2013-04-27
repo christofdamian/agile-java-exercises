@@ -19,33 +19,52 @@ public class Board {
         for (int i=0; i<8; i++) {
             pieces.add(new ArrayList<Piece>());
         }
-        pieces.set(0, createQueenRank(Piece.COLOUR_WHITE));
-        pieces.set(1, createPawnRank(Piece.COLOUR_WHITE));
-        pieces.set(6, createPawnRank(Piece.COLOUR_BLACK));
-        pieces.set(7, createQueenRank(Piece.COLOUR_BLACK));
+        pieces.set(0, createWhiteQueenRank());
+        pieces.set(1, createWhitePawnRank());
+        pieces.set(6, createBlackPawnRank());
+        pieces.set(7, createBlackQueenRank());
     }
 
-    private ArrayList<Piece> createPawnRank(String colour) {
+    private ArrayList<Piece> createWhitePawnRank() {
         ArrayList<Piece> rank = new ArrayList<Piece>();
         for (int i=0; i<8; i++) {
-            rank.add(Piece.create(colour, Piece.TYPE_PAWN));
+            rank.add(Piece.createWhitePawn());
+        }
+        return rank;
+    }
+    private ArrayList<Piece> createBlackPawnRank() {
+        ArrayList<Piece> rank = new ArrayList<Piece>();
+        for (int i=0; i<8; i++) {
+            rank.add(Piece.createBlackPawn());
         }
         return rank;
     }
 
-    private ArrayList<Piece> createQueenRank(String colour) {
+    private ArrayList<Piece> createWhiteQueenRank() {
         ArrayList<Piece> rank = new ArrayList<Piece>();
-        rank.add(Piece.create(colour, Piece.TYPE_ROOK));
-        rank.add(Piece.create(colour, Piece.TYPE_KNIGHT));
-        rank.add(Piece.create(colour, Piece.TYPE_BISHOP));
-        rank.add(Piece.create(colour, Piece.TYPE_QUEEN));
-        rank.add(Piece.create(colour, Piece.TYPE_KING));
-        rank.add(Piece.create(colour, Piece.TYPE_BISHOP));
-        rank.add(Piece.create(colour, Piece.TYPE_KNIGHT));
-        rank.add(Piece.create(colour, Piece.TYPE_ROOK));
+        rank.add(Piece.createWhiteRook());
+        rank.add(Piece.createWhiteKnight());
+        rank.add(Piece.createWhiteBishop());
+        rank.add(Piece.createWhiteQueen());
+        rank.add(Piece.createWhiteKing());
+        rank.add(Piece.createWhiteBishop());
+        rank.add(Piece.createWhiteKnight());
+        rank.add(Piece.createWhiteRook());
         return rank;
     }
 
+    private ArrayList<Piece> createBlackQueenRank() {
+        ArrayList<Piece> rank = new ArrayList<Piece>();
+        rank.add(Piece.createBlackRook());
+        rank.add(Piece.createBlackKnight());
+        rank.add(Piece.createBlackBishop());
+        rank.add(Piece.createBlackQueen());
+        rank.add(Piece.createBlackKing());
+        rank.add(Piece.createBlackBishop());
+        rank.add(Piece.createBlackKnight());
+        rank.add(Piece.createBlackRook());
+        return rank;
+    }
 
     /**
      * Get number of pieces

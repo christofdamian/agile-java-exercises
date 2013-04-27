@@ -1,23 +1,39 @@
 package pieces;
 
 public class Piece {
-    public final static String COLOUR_WHITE = "white";
-    public final static String COLOUR_BLACK = "black";
+    enum Colour {
+        WHITE,
+        BLACK
+    }
 
-    public final static String TYPE_PAWN = "p";
-    public final static String TYPE_KNIGHT = "n";
-    public final static String TYPE_ROOK = "r";
-    public final static String TYPE_KING = "k";
-    public final static String TYPE_QUEEN = "q";
-    public final static String TYPE_BISHOP = "b";
+    enum Type {
+        PAWN("p"),
+        KNIGHT("n"),
+        ROOK("r"),
+        KING("k"),
+        QUEEN("q"),
+        BISHOP("b");
+
+        String name;
+
+        private Type(String name)
+        {
+            this.name = name;
+        }
+
+        public String getName()
+        {
+            return name;
+        }
+    }
 
     private static int whitePiecesInUse = 0;
     private static int blackPiecesInUse = 0;
 
-    String colour;
-    String type;
+    Colour colour;
+    Type type;
 
-    private Piece(String colour, String type) {
+    private Piece(Colour colour, Type type) {
         this.colour = colour;
         this.type = type;
     }
@@ -27,8 +43,8 @@ public class Piece {
      * @param colour
      * @param type
      */
-    public static Piece create(String colour, String type) {
-        if (colour == COLOUR_WHITE) {
+    private static Piece create(Colour colour, Type type) {
+        if (colour == Colour.WHITE) {
             whitePiecesInUse++;
         } else {
             blackPiecesInUse++;
@@ -36,14 +52,63 @@ public class Piece {
         return new Piece(colour, type);
     }
 
+    public static Piece createWhitePawn()
+    {
+        return create(Colour.WHITE, Type.PAWN);
+    }
+    public static Piece createWhiteRook()
+    {
+        return create(Colour.WHITE, Type.ROOK);
+    }
+    public static Piece createWhiteKing()
+    {
+        return create(Colour.WHITE, Type.KING);
+    }
+    public static Piece createWhiteQueen()
+    {
+        return create(Colour.WHITE, Type.QUEEN);
+    }
+    public static Piece createWhiteBishop()
+    {
+        return create(Colour.WHITE, Type.BISHOP);
+    }
+    public static Piece createWhiteKnight()
+    {
+        return create(Colour.WHITE, Type.KNIGHT);
+    }
+
+    public static Piece createBlackPawn()
+    {
+        return create(Colour.BLACK, Type.PAWN);
+    }
+    public static Piece createBlackRook()
+    {
+        return create(Colour.BLACK, Type.ROOK);
+    }
+    public static Piece createBlackKing()
+    {
+        return create(Colour.BLACK, Type.KING);
+    }
+    public static Piece createBlackQueen()
+    {
+        return create(Colour.BLACK, Type.QUEEN);
+    }
+    public static Piece createBlackBishop()
+    {
+        return create(Colour.BLACK, Type.BISHOP);
+    }
+    public static Piece createBlackKnight()
+    {
+        return create(Colour.BLACK, Type.KNIGHT);
+    }
+
     public static void resetCount() {
         whitePiecesInUse = 0;
         blackPiecesInUse = 0;
     }
 
-
     public boolean isWhite() {
-        return colour == COLOUR_WHITE;
+        return colour == Colour.WHITE;
     }
 
     public boolean isBlack() {
@@ -67,15 +132,15 @@ public class Piece {
      * Get colour of piece.
      * @return
      */
-    public String getColour() {
+    public Colour getColour() {
         return colour;
     }
 
     public String toString() {
         if (this.isWhite()) {
-            return type.toUpperCase();
+            return type.getName().toUpperCase();
         }
-        return type;
+        return type.getName();
     }
 
 }

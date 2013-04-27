@@ -5,37 +5,25 @@ import junit.framework.TestCase;
 public class PieceTest extends TestCase {
 
     public void testCreate() {
-        Piece pawn = Piece.create(
-                Piece.COLOUR_WHITE,
-                Piece.TYPE_PAWN
-        );
-        assertEquals(Piece.COLOUR_WHITE, pawn.getColour());
+        Piece pawn = Piece.createWhitePawn();
+        assertEquals(Piece.Colour.WHITE, pawn.getColour());
 
-        pawn = Piece.create(
-                Piece.COLOUR_BLACK,
-                Piece.TYPE_PAWN
-        );
-        assertEquals(Piece.COLOUR_BLACK, pawn.getColour());
+        pawn = Piece.createBlackPawn();
+        assertEquals(Piece.Colour.BLACK, pawn.getColour());
     }
 
     public void testPrintable() {
-        Piece pawn = Piece.create(
-                Piece.COLOUR_WHITE,
-                Piece.TYPE_PAWN
-        );
+        Piece pawn = Piece.createWhitePawn();
         assertEquals("P", pawn.toString());
 
-        pawn = Piece.create(
-                Piece.COLOUR_BLACK,
-                Piece.TYPE_PAWN
-        );;
+        pawn = Piece.createBlackPawn();
         assertEquals("p", pawn.toString());
    }
 
     public void testIsWhite() {
-        assertTrue(Piece.create(Piece.COLOUR_WHITE, Piece.TYPE_PAWN).isWhite());
+        assertTrue(Piece.createWhitePawn().isWhite());
     }
     public void testIsBlack() {
-        assertTrue(Piece.create(Piece.COLOUR_BLACK, Piece.TYPE_PAWN).isBlack());
+        assertTrue(Piece.createBlackPawn().isBlack());
     }
 }
