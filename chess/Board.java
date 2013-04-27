@@ -126,8 +126,8 @@ public class Board {
 
     public Piece getPosition(String position)
     {
-        int column = (int)position.charAt(0);
-
-        return pieces.get(0).get(0);
+        int column = ((int)position.charAt(0)-(int)'a');
+        int row = 8-((int)position.charAt(1)-(int)'0');
+        return pieces.get(row).get(column);
     }
 }
