@@ -1,6 +1,7 @@
 package pieces;
 
-public class Piece {
+
+public class Piece implements Comparable<Piece> {
     enum Colour {
         WHITE,
         BLACK
@@ -33,6 +34,7 @@ public class Piece {
 
     Colour colour;
     Type type;
+    double strength = 0.0;
 
     private Piece(Colour colour, Type type) {
         this.colour = colour;
@@ -118,7 +120,7 @@ public class Piece {
     }
 
     public boolean isBlack() {
-        return !isWhite();
+        return  colour == Colour.BLACK;
     }
 
     public static int getPiecesInUse() {
@@ -152,4 +154,18 @@ public class Piece {
         return type.getName();
     }
 
+    public void setStrength(double strength)
+    {
+        this.strength = strength;
+    }
+
+    public double getStrength()
+    {
+        return strength;
+    }
+
+    public int compareTo(Piece other)
+    {
+        return (int)(other.getStrength()-getStrength());
+    }
 }

@@ -110,6 +110,29 @@ public class BoardTest extends TestCase {
         board.setPosition("a6", Piece.createWhitePawn());
         board.setPosition("b6", Piece.createWhitePawn());
         assertEquals(22, board.getStrength(), 0.01);
-
     }
+
+    public void testGetWhitePiecesStrength()
+    {
+        board.setPosition("c7", Piece.createWhiteBishop());
+        board.setPosition("a7", Piece.createWhiteQueen());
+        board.setPosition("b7", Piece.createWhiteRook());
+        board.setPosition("d7", Piece.createWhiteKnight());
+        board.setPosition("a6", Piece.createWhitePawn());
+        board.setPosition("b6", Piece.createWhitePawn());
+
+        assertEquals(
+                "[Q, R, B, N, P, P]",
+                board.getWhitePiecesStrength().toString()
+        );
+    }
+
+    public void testGetBlackPiecesStrength()
+    {
+        board.setPosition("c7", Piece.createWhiteBishop());
+        board.setPosition("a7", Piece.createBlackQueen());
+
+        assertEquals("[q]", board.getBlackPiecesStrength().toString());
+    }
+
 }

@@ -26,4 +26,25 @@ public class PieceTest extends TestCase {
     public void testIsBlack() {
         assertTrue(Piece.createBlackPawn().isBlack());
     }
+
+    public void testStrength()
+    {
+        Piece pawn = Piece.createWhitePawn();
+        assertEquals(0, pawn.getStrength(), 0.1);
+        pawn.setStrength(10);
+        assertEquals(10, pawn.getStrength(), 0.1);
+    }
+
+    public void testCompareTo()
+    {
+        Piece pawn = Piece.createWhitePawn();
+        Piece king = Piece.createWhiteKing();
+
+        pawn.setStrength(1);
+        king.setStrength(2);
+
+        assertEquals(1, pawn.compareTo(king));
+        assertEquals(-1, king.compareTo(pawn));
+        assertEquals(0, pawn.compareTo(pawn));
+    }
 }

@@ -1,6 +1,7 @@
 package chess;
 
 import java.util.ArrayList;
+import java.util.Collections;
 
 import pieces.Piece;
 
@@ -155,28 +156,66 @@ public class Board {
         return count;
     }
 
-    public float getStrength()
+    public void calculateStrength()
     {
-        float strength = 0;
         for (ArrayList<Piece> row: pieces) {
             for (Piece piece: row) {
                 if (piece.toString().equalsIgnoreCase("b")) {
-                    strength += 3;
+                    piece.setStrength(3);
                 } else if (piece.toString().equalsIgnoreCase("q")) {
-                    strength += 9;
+                    piece.setStrength(9);
                 } else if (piece.toString().equalsIgnoreCase("r")) {
-                    strength += 5;
+                    piece.setStrength(5);
                 } else if (piece.toString().equalsIgnoreCase("n")) {
-                    strength += 2.5;
+                    piece.setStrength(2.5);
                 } else if (piece.toString().equalsIgnoreCase("p")) {
                     if (countPieces(row, piece)>1) {
-                        strength += 1;
+                        piece.setStrength(1);
                     } else {
-                        strength += 0.5;
+                        piece.setStrength(0.5);
                     }
                 }
             }
         }
+    }
+
+    public double getStrength()
+    {
+        calculateStrength();
+
+        double strength = 0;
+        for (ArrayList<Piece> row: pieces) {
+            for (Piece piece: row) {
+                strength += piece.getStrength();
+            }
+        }
         return strength;
+    }
+
+    private ArrayList<Piece> getPiecesStrength(boolean white)
+    {
+        ArrayList<Piece> list = new ArrayList<Piece>();
+
+        calculateStrength();
+
+        for (ArrayList<Piece> row: pieces) {
+            for (Piece piece: row) {
+                if (piece.isWhite() == white && piece.isBlack() != white) {
+                    list.add(piece);
+                }
+            }
+        }
+        Collections.sort(list);
+        return list;
+    }
+
+    public ArrayList<Piece> getWhitePiecesStrength()
+    {
+        return getPiecesStrength(true);
+    }
+
+    public ArrayList<Piece> getBlackPiecesStrength()
+    {
+        return getPiecesStrength(false);
     }
 }
