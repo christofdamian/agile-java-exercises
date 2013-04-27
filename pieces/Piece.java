@@ -7,7 +7,7 @@ public class Piece implements Comparable<Piece> {
         BLACK
     }
 
-    enum Type {
+    public enum Type {
         PAWN("p"),
         KNIGHT("n"),
         ROOK("r"),
@@ -142,6 +142,11 @@ public class Piece implements Comparable<Piece> {
      */
     public Colour getColour() {
         return colour;
+    }
+
+    public Type getType()
+    {
+        return type;
     }
 
     public String toString() {
