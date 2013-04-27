@@ -12,7 +12,8 @@ public class Piece {
         ROOK("r"),
         KING("k"),
         QUEEN("q"),
-        BISHOP("b");
+        BISHOP("b"),
+        EMPTY(".");
 
         String name;
 
@@ -46,10 +47,15 @@ public class Piece {
     private static Piece create(Colour colour, Type type) {
         if (colour == Colour.WHITE) {
             whitePiecesInUse++;
-        } else {
+        } else if (colour == Colour.BLACK) {
             blackPiecesInUse++;
         }
         return new Piece(colour, type);
+    }
+
+    public static Piece createEmpty()
+    {
+        return create(null, Type.EMPTY);
     }
 
     public static Piece createWhitePawn()
@@ -137,6 +143,9 @@ public class Piece {
     }
 
     public String toString() {
+        if (this.type == Type.EMPTY) {
+            return ".";
+        }
         if (this.isWhite()) {
             return type.getName().toUpperCase();
         }
