@@ -46,22 +46,6 @@ public class Game {
         board.setPosition("h8", Piece.createWhiteRook());
     }
 
-    /**
-     * Get number of pieces
-     * @return
-     */
-    public int getNumberOfPieces() {
-       return Piece.getPiecesInUse();
-    }
-
-    public int getNumberOfWhitePieces() {
-        return Piece.getNumberOfWhitePieces();
-    }
-
-    public int getNumberOfBlackPieces() {
-        return Piece.getNumberOfBlackPieces();
-    }
-
     public String toString() {
         return board.toString();
     }
@@ -129,4 +113,8 @@ public class Game {
         return getPiecesStrength(false);
     }
 
+    public void setPosition(String position, Piece piece)
+    {
+        board.setPosition(position, piece);
+    }
 }

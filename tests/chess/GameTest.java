@@ -1,7 +1,6 @@
-package chess;
+package tests.chess;
 
-import java.util.ArrayList;
-
+import chess.Game;
 import pieces.Piece;
 import junit.framework.TestCase;
 
@@ -13,13 +12,6 @@ public class GameTest extends TestCase {
 
     public void setUp() {
         game = new Game();
-    }
-
-    public void testNumberOfPieces() {
-        game.setup();
-        assertEquals(32, game.getNumberOfPieces());
-        assertEquals(16, game.getNumberOfWhitePieces());
-        assertEquals(16, game.getNumberOfBlackPieces());
     }
 
     public void testEmptyBoard() {
@@ -55,31 +47,31 @@ public class GameTest extends TestCase {
 
     public void testGetStrength()
     {
-        game.board.setPosition("c7", Piece.createWhiteBishop());
+        game.setPosition("c7", Piece.createWhiteBishop());
         assertEquals(3.0, game.getStrength(), 0.01);
-        game.board.setPosition("a7", Piece.createWhiteQueen());
+        game.setPosition("a7", Piece.createWhiteQueen());
         assertEquals(12.0, game.getStrength(), 0.01);
-        game.board.setPosition("b7", Piece.createWhiteRook());
+        game.setPosition("b7", Piece.createWhiteRook());
         assertEquals(17.0, game.getStrength(), 0.01);
-        game.board.setPosition("d7", Piece.createWhiteKnight());
+        game.setPosition("d7", Piece.createWhiteKnight());
         assertEquals(19.5, game.getStrength(), 0.01);
 
-        game.board.setPosition("e7", Piece.createWhitePawn());
+        game.setPosition("e7", Piece.createWhitePawn());
         assertEquals(20, game.getStrength(), 0.01);
 
-        game.board.setPosition("a6", Piece.createWhitePawn());
-        game.board.setPosition("b6", Piece.createWhitePawn());
+        game.setPosition("a6", Piece.createWhitePawn());
+        game.setPosition("b6", Piece.createWhitePawn());
         assertEquals(22, game.getStrength(), 0.01);
     }
 
     public void testGetWhitePiecesStrength()
     {
-        game.board.setPosition("c7", Piece.createWhiteBishop());
-        game.board.setPosition("a7", Piece.createWhiteQueen());
-        game.board.setPosition("b7", Piece.createWhiteRook());
-        game.board.setPosition("d7", Piece.createWhiteKnight());
-        game.board.setPosition("a6", Piece.createWhitePawn());
-        game.board.setPosition("b6", Piece.createWhitePawn());
+        game.setPosition("c7", Piece.createWhiteBishop());
+        game.setPosition("a7", Piece.createWhiteQueen());
+        game.setPosition("b7", Piece.createWhiteRook());
+        game.setPosition("d7", Piece.createWhiteKnight());
+        game.setPosition("a6", Piece.createWhitePawn());
+        game.setPosition("b6", Piece.createWhitePawn());
 
         assertEquals(
                 "[Q, R, B, N, P, P]",
@@ -89,8 +81,8 @@ public class GameTest extends TestCase {
 
     public void testGetBlackPiecesStrength()
     {
-        game.board.setPosition("c7", Piece.createWhiteBishop());
-        game.board.setPosition("a7", Piece.createBlackQueen());
+        game.setPosition("c7", Piece.createWhiteBishop());
+        game.setPosition("a7", Piece.createBlackQueen());
 
         assertEquals("[q]", game.getBlackPiecesStrength().toString());
     }

@@ -1,6 +1,9 @@
-package pieces;
+package tests.pieces;
 
 import java.util.ArrayList;
+
+import pieces.Piece;
+import pieces.Piece.Colour;
 
 import chess.Board;
 

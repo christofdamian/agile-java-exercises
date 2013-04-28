@@ -6,7 +6,7 @@ import chess.Board;
 
 
 public class Piece implements Comparable<Piece> {
-    enum Colour {
+    public enum Colour {
         WHITE,
         BLACK
     }
@@ -40,12 +40,13 @@ public class Piece implements Comparable<Piece> {
         }
     }
 
-    private static int whitePiecesInUse = 0;
-    private static int blackPiecesInUse = 0;
-
     Colour colour;
     Type type;
     double strength = 0.0;
+
+    protected Piece(Colour colour) {
+        this.colour = colour;
+    }
 
     private Piece(Colour colour, Type type) {
         this.colour = colour;
@@ -58,11 +59,6 @@ public class Piece implements Comparable<Piece> {
      * @param type
      */
     private static Piece create(Colour colour, Type type) {
-        if (colour == Colour.WHITE) {
-            whitePiecesInUse++;
-        } else if (colour == Colour.BLACK) {
-            blackPiecesInUse++;
-        }
         return new Piece(colour, type);
     }
 
@@ -81,11 +77,11 @@ public class Piece implements Comparable<Piece> {
     }
     public static Piece createWhiteKing()
     {
-        return create(Colour.WHITE, Type.KING);
+        return new King(Colour.WHITE);
     }
     public static Piece createWhiteQueen()
     {
-        return create(Colour.WHITE, Type.QUEEN);
+        return new Queen(Colour.WHITE);
     }
     public static Piece createWhiteBishop()
     {
@@ -106,11 +102,11 @@ public class Piece implements Comparable<Piece> {
     }
     public static Piece createBlackKing()
     {
-        return create(Colour.BLACK, Type.KING);
+        return new King(Colour.BLACK);
     }
     public static Piece createBlackQueen()
     {
-        return create(Colour.BLACK, Type.QUEEN);
+        return new Queen(Colour.BLACK);
     }
     public static Piece createBlackBishop()
     {
@@ -121,30 +117,12 @@ public class Piece implements Comparable<Piece> {
         return create(Colour.BLACK, Type.KNIGHT);
     }
 
-    public static void resetCount() {
-        whitePiecesInUse = 0;
-        blackPiecesInUse = 0;
-    }
-
     public boolean isWhite() {
         return colour == Colour.WHITE;
     }
 
     public boolean isBlack() {
         return  colour == Colour.BLACK;
-    }
-
-    public static int getPiecesInUse() {
-        return whitePiecesInUse+blackPiecesInUse;
-    }
-
-    public static int getNumberOfWhitePieces() {
-        return whitePiecesInUse;
-    }
-
-
-    public static int getNumberOfBlackPieces() {
-        return blackPiecesInUse;
     }
 
     /**
@@ -160,14 +138,22 @@ public class Piece implements Comparable<Piece> {
         return type;
     }
 
+    public String getName() {
+        return type.getName();
+    }
+
+    protected String uppercaseForWhite() {
+        if (this.isWhite()) {
+            return getName().toUpperCase();
+        }
+        return getName();
+    }
+
     public String toString() {
-        if (this.type == Type.EMPTY) {
+        if (this.getType() == Type.EMPTY) {
             return ".";
         }
-        if (this.isWhite()) {
-            return type.getName().toUpperCase();
-        }
-        return type.getName();
+        return uppercaseForWhite();
     }
 
     public void setStrength(double strength)
@@ -187,41 +173,6 @@ public class Piece implements Comparable<Piece> {
 
     public ArrayList<String> getPossibleMoves(Board board)
     {
-        String from = board.findPiece(this);
-        ArrayList<String> moves = new ArrayList<String>();
-
-        if (this.getType()==Type.KING) {
-            for (int x=-1; x<=1; x++) {
-                for (int y=-1; y<=1; y++) {
-                    if (board.isValidDirection(from, x, y) && !(x==0 && y==0)) {
-                        moves.add(board.getMoveDirection(from, x, y));
-                    }
-                }
-            }
-        } else {
-            for (int x=-1; x<=1; x++) {
-                for (int y=-1; y<=1; y++) {
-                    if (x!=0 || y!=0) {
-                        continueDirection(moves, from, x, y, board);
-                    }
-                }
-            }
-        }
-        return moves;
+        return new ArrayList<String>();
     }
-
-    private void continueDirection(
-            ArrayList<String> moves,
-            String from,
-            int x,
-            int y,
-            Board board
-            ) {
-        if (board.isValidDirection(from, x, y)) {
-            String to = board.getMoveDirection(from, x, y);
-            moves.add(to);
-            continueDirection(moves, to, x, y, board);
-        }
-    }
-
 }
