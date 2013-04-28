@@ -46,4 +46,10 @@ public class KingTest extends TestCase {
         assertTrue(moves.contains("b2"));
         assertTrue(moves.contains("a2"));
     }
+
+    public void testGetBaseStrength()
+    {
+        King king = new King(Colour.BLACK);
+        assertEquals(0.0, king.getBaseStrength());
+    }
 }
