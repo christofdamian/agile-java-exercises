@@ -4,7 +4,6 @@ import java.util.ArrayList;
 
 import chess.Board;
 
-
 public class Piece implements Comparable<Piece> {
     public enum Colour {
         WHITE,
@@ -69,11 +68,11 @@ public class Piece implements Comparable<Piece> {
 
     public static Piece createWhitePawn()
     {
-        return create(Colour.WHITE, Type.PAWN);
+        return new Pawn(Colour.WHITE);
     }
     public static Piece createWhiteRook()
     {
-        return create(Colour.WHITE, Type.ROOK);
+        return new Rook(Colour.WHITE);
     }
     public static Piece createWhiteKing()
     {
@@ -85,20 +84,20 @@ public class Piece implements Comparable<Piece> {
     }
     public static Piece createWhiteBishop()
     {
-        return create(Colour.WHITE, Type.BISHOP);
+        return new Bishop(Colour.WHITE);
     }
     public static Piece createWhiteKnight()
     {
-        return create(Colour.WHITE, Type.KNIGHT);
+        return new Knight(Colour.WHITE);
     }
 
     public static Piece createBlackPawn()
     {
-        return create(Colour.BLACK, Type.PAWN);
+        return new Pawn(Colour.BLACK);
     }
     public static Piece createBlackRook()
     {
-        return create(Colour.BLACK, Type.ROOK);
+        return new Rook(Colour.BLACK);
     }
     public static Piece createBlackKing()
     {
@@ -110,11 +109,11 @@ public class Piece implements Comparable<Piece> {
     }
     public static Piece createBlackBishop()
     {
-        return create(Colour.BLACK, Type.BISHOP);
+        return new Bishop(Colour.BLACK);
     }
     public static Piece createBlackKnight()
     {
-        return create(Colour.BLACK, Type.KNIGHT);
+        return new Knight(Colour.BLACK);
     }
 
     public boolean isWhite() {
@@ -122,7 +121,7 @@ public class Piece implements Comparable<Piece> {
     }
 
     public boolean isBlack() {
-        return  colour == Colour.BLACK;
+        return colour == Colour.BLACK;
     }
 
     /**
@@ -139,21 +138,14 @@ public class Piece implements Comparable<Piece> {
     }
 
     public String getName() {
-        return type.getName();
+        return ".";
     }
 
-    protected String uppercaseForWhite() {
+    public String toString() {
         if (this.isWhite()) {
             return getName().toUpperCase();
         }
         return getName();
-    }
-
-    public String toString() {
-        if (this.getType() == Type.EMPTY) {
-            return ".";
-        }
-        return uppercaseForWhite();
     }
 
     public void setStrength(double strength)
@@ -164,6 +156,11 @@ public class Piece implements Comparable<Piece> {
     public double getStrength()
     {
         return strength;
+    }
+
+    public double getBaseStrength()
+    {
+        return 0.0;
     }
 
     public int compareTo(Piece other)

@@ -8,7 +8,6 @@ public class King extends Piece {
 
     public King(Colour colour) {
         super(colour);
-        this.colour = colour;
     }
 
     public Type getType()
@@ -20,6 +19,12 @@ public class King extends Piece {
     {
         return "k";
     }
+
+    public double getBaseStrength()
+    {
+        return 0.0;
+    }
+
 
     public ArrayList<String> getPossibleMoves(Board board)
     {

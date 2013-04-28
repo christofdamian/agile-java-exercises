@@ -6,10 +6,8 @@ import chess.Board;
 
 public class Queen extends Piece {
 
-
     public Queen(Colour colour) {
         super(colour);
-        this.colour = colour;
     }
 
     public Type getType()
@@ -20,6 +18,11 @@ public class Queen extends Piece {
     public String getName()
     {
         return "q";
+    }
+
+    public double getBaseStrength()
+    {
+        return 9.0;
     }
 
     public ArrayList<String> getPossibleMoves(Board board)
