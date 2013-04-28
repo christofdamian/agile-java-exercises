@@ -1,5 +1,7 @@
 package chess;
 
+import java.util.ArrayList;
+
 import pieces.Piece;
 import junit.framework.TestCase;
 
@@ -93,15 +95,19 @@ public class GameTest extends TestCase {
         assertEquals("[q]", game.getBlackPiecesStrength().toString());
     }
 
-    public void testCheckKingMove()
-    {
-        assertTrue(game.checkKingMove("d5", "e5"));
-        assertTrue(game.checkKingMove("d5", "d6"));
-        assertTrue(game.checkKingMove("d5", "e6"));
-        assertTrue(game.checkKingMove("d5", "c4"));
 
-        assertFalse(game.checkKingMove("d5", "d5"));
-        assertFalse(game.checkKingMove("d5", "c7"));
-        assertFalse(game.checkKingMove("d5", "a5"));
+    public void testGetAvailableMoves()
+    {
+        ArrayList<String> moves = game.getAvailableMoves("d5");
+        assertEquals(8, moves.size());
+        assertFalse(moves.contains("d5"));
+        assertTrue(moves.contains("c4"));
+        assertTrue(moves.contains("d4"));
+        assertTrue(moves.contains("e4"));
+        assertTrue(moves.contains("c5"));
+        assertTrue(moves.contains("e5"));
+        assertTrue(moves.contains("c6"));
+        assertTrue(moves.contains("d6"));
+        assertTrue(moves.contains("e6"));
     }
 }

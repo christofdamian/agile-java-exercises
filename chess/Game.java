@@ -129,17 +129,17 @@ public class Game {
         return getPiecesStrength(false);
     }
 
-    public boolean checkKingMove(String from, String to)
+    public ArrayList<String> getAvailableMoves(String from)
     {
-        int rows = Math.abs((int)from.charAt(1)-(int)to.charAt(1));
-        int cols = Math.abs((int)from.charAt(0)-(int)to.charAt(0));
+        ArrayList<String> moves = new ArrayList<String>();
 
-        if (rows==0 && cols==0) {
-            return false;
+        for (int x=-1; x<=1; x++) {
+            for (int y=-1; y<=1; y++) {
+                if (board.isValidDirection(from, x, y) && !(x==0 && y==0)) {
+                    moves.add(board.getMoveDirection(from, x, y));
+                }
+            }
         }
-        if (rows<=1 && cols<=1) {
-            return true;
-        }
-        return false;
+        return moves;
     }
 }
