@@ -95,42 +95,4 @@ public class GameTest extends TestCase {
         assertEquals("[q]", game.getBlackPiecesStrength().toString());
     }
 
-
-    public void testGetAvailableMovesKing()
-    {
-        game.board.setPosition("d5", Piece.createWhiteKing());
-        ArrayList<String> moves = game.getAvailableMoves("d5");
-        assertEquals(8, moves.size());
-        assertFalse(moves.contains("d5"));
-        assertTrue(moves.contains("c4"));
-        assertTrue(moves.contains("d4"));
-        assertTrue(moves.contains("e4"));
-        assertTrue(moves.contains("c5"));
-        assertTrue(moves.contains("e5"));
-        assertTrue(moves.contains("c6"));
-        assertTrue(moves.contains("d6"));
-        assertTrue(moves.contains("e6"));
-    }
-
-    public void testGetAvailableMovesKingCorner()
-    {
-        game.board.setPosition("a1", Piece.createWhiteKing());
-        ArrayList<String> moves = game.getAvailableMoves("a1");
-        assertEquals(3, moves.size());
-        assertTrue(moves.contains("b1"));
-        assertTrue(moves.contains("b2"));
-        assertTrue(moves.contains("a2"));
-    }
-
-    public void testGetAvailableMovesQueenCorner()
-    {
-        game.board.setPosition("a1", Piece.createWhiteQueen());
-        ArrayList<String> moves = game.getAvailableMoves("a1");
-        assertFalse(moves.contains("a1"));
-        assertTrue(moves.contains("h1"));
-        assertTrue(moves.contains("a8"));
-        assertTrue(moves.contains("b2"));
-        assertTrue(moves.contains("h8"));
-    }
-
 }

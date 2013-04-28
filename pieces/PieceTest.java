@@ -1,5 +1,9 @@
 package pieces;
 
+import java.util.ArrayList;
+
+import chess.Board;
+
 import junit.framework.TestCase;
 
 public class PieceTest extends TestCase {
@@ -46,5 +50,50 @@ public class PieceTest extends TestCase {
         assertEquals(1, pawn.compareTo(king));
         assertEquals(-1, king.compareTo(pawn));
         assertEquals(0, pawn.compareTo(pawn));
+    }
+
+    public void testGetAvailableMovesKing()
+    {
+        Board board = new Board();
+        Piece piece = Piece.createWhiteKing();
+        board.setPosition("d5", piece);
+        ArrayList<String> moves = piece.getPossibleMoves(board);
+        assertEquals(8, moves.size());
+        assertFalse(moves.contains("d5"));
+        assertTrue(moves.contains("c4"));
+        assertTrue(moves.contains("d4"));
+        assertTrue(moves.contains("e4"));
+        assertTrue(moves.contains("c5"));
+        assertTrue(moves.contains("e5"));
+        assertTrue(moves.contains("c6"));
+        assertTrue(moves.contains("d6"));
+        assertTrue(moves.contains("e6"));
+    }
+
+    public void testGetAvailableMovesKingCorner()
+    {
+        Board board = new Board();
+        Piece piece = Piece.createWhiteKing();
+        board.setPosition("a1", piece);
+        ArrayList<String> moves = piece.getPossibleMoves(board);
+
+        assertEquals(3, moves.size());
+        assertTrue(moves.contains("b1"));
+        assertTrue(moves.contains("b2"));
+        assertTrue(moves.contains("a2"));
+    }
+
+    public void testGetAvailableMovesQueenCorner()
+    {
+        Board board = new Board();
+        Piece piece = Piece.createWhiteQueen();
+        board.setPosition("a1", piece);
+        ArrayList<String> moves = piece.getPossibleMoves(board);
+
+        assertFalse(moves.contains("a1"));
+        assertTrue(moves.contains("h1"));
+        assertTrue(moves.contains("a8"));
+        assertTrue(moves.contains("b2"));
+        assertTrue(moves.contains("h8"));
     }
 }
