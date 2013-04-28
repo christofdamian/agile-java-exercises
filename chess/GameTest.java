@@ -110,4 +110,13 @@ public class GameTest extends TestCase {
         assertTrue(moves.contains("d6"));
         assertTrue(moves.contains("e6"));
     }
+
+    public void testGetAvailableMovesCorner()
+    {
+        ArrayList<String> moves = game.getAvailableMoves("a1");
+        assertEquals(3, moves.size());
+        assertTrue(moves.contains("b1"));
+        assertTrue(moves.contains("b2"));
+        assertTrue(moves.contains("a2"));
+    }
 }
