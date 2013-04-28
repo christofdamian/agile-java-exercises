@@ -10,11 +10,6 @@ public class King extends Piece {
         super(colour);
     }
 
-    public Type getType()
-    {
-        return Type.KING;
-    }
-
     public String getName()
     {
         return "k";

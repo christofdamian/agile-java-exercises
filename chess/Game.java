@@ -2,8 +2,10 @@ package chess;
 
 import java.util.ArrayList;
 import java.util.Collections;
+
+import pieces.Pawn;
 import pieces.Piece;
-import pieces.Piece.Type;
+import pieces.Piece.Colour;
 
 public class Game {
     Board board = new Board();
@@ -66,8 +68,8 @@ public class Game {
         for (int rank=1; rank<=8; rank++) {
             ArrayList<Piece> row = board.getRank(rank);
             for (Piece piece: row) {
-                piece.setStrength(piece.getType().getStrength());
-                if (piece.getType()==Type.PAWN && countPieces(row, piece)>1) {
+                piece.setStrength(piece.getBaseStrength());
+                if (piece instanceof Pawn && countPieces(row, piece)>1) {
                     piece.setStrength(1);
                 }
             }
@@ -85,7 +87,7 @@ public class Game {
         return strength;
     }
 
-    private ArrayList<Piece> getPiecesStrength(boolean white)
+    private ArrayList<Piece> getPiecesStrength(Colour colour)
     {
         ArrayList<Piece> list = new ArrayList<Piece>();
 
@@ -94,23 +96,24 @@ public class Game {
         for (int rank=1; rank<=8; rank++) {
             ArrayList<Piece> row = board.getRank(rank);
             for (Piece piece: row) {
-                if (piece.isWhite() == white && piece.isBlack() != white) {
+                if (piece.getColour() == colour) {
                     list.add(piece);
                 }
             }
         }
+
         Collections.sort(list);
         return list;
     }
 
     public ArrayList<Piece> getWhitePiecesStrength()
     {
-        return getPiecesStrength(true);
+        return getPiecesStrength(Colour.WHITE);
     }
 
     public ArrayList<Piece> getBlackPiecesStrength()
     {
-        return getPiecesStrength(false);
+        return getPiecesStrength(Colour.BLACK);
     }
 
     public void setPosition(String position, Piece piece)

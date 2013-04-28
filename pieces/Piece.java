@@ -6,64 +6,21 @@ import chess.Board;
 
 public class Piece implements Comparable<Piece> {
     public enum Colour {
+        EMPTY,
         WHITE,
         BLACK
     }
 
-    public enum Type {
-        PAWN("p", 0.5),
-        KNIGHT("n", 2.5),
-        ROOK("r", 5.0),
-        KING("k", 0.0),
-        QUEEN("q", 9.0),
-        BISHOP("b", 3.0),
-        EMPTY(".", 0.0);
-
-        String name;
-        double strength;
-
-        private Type(String name, double strength)
-        {
-            this.name = name;
-            this.strength = strength;
-        }
-
-        public String getName()
-        {
-            return name;
-        }
-
-        public double getStrength()
-        {
-            return strength;
-        }
-    }
-
     Colour colour;
-    Type type;
     double strength = 0.0;
 
     protected Piece(Colour colour) {
         this.colour = colour;
     }
 
-    private Piece(Colour colour, Type type) {
-        this.colour = colour;
-        this.type = type;
-    }
-
-    /**
-     * Create piece of colour
-     * @param colour
-     * @param type
-     */
-    private static Piece create(Colour colour, Type type) {
-        return new Piece(colour, type);
-    }
-
     public static Piece createEmpty()
     {
-        return create(null, Type.EMPTY);
+        return new Piece(Colour.EMPTY);
     }
 
     public static Piece createWhitePawn()
@@ -130,11 +87,6 @@ public class Piece implements Comparable<Piece> {
      */
     public Colour getColour() {
         return colour;
-    }
-
-    public Type getType()
-    {
-        return type;
     }
 
     public String getName() {
